@@ -1,0 +1,11 @@
+{
+  "name": "claudifier",
+  "version": "1.0.0",
+  "bin": {
+    "claudifier": "bin/install.js"
+  },
+  "files": [
+    "bin",
+    "sound"
+  ]
+}

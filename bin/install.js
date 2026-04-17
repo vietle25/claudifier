@@ -1,20 +1,33 @@
 #!/usr/bin/env node
-const { execSync } = require('child_process');
+const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
-// 1. Get the absolute path of the sound file in the installed package
 const soundPath = path.join(__dirname, '../sound/done.mp3');
+const settingsPath = path.join(os.homedir(), '.claude', 'settings.json');
 
-// 2. The command we want Claude to run
-const commandStop = `osascript -e 'display notification \"Task Complete\" with title \"Claude Code\"'; afplay \"${soundPath}\"`;
-const commandAttention = `osascript -e 'display notification "Claude Code needs your attention" with title "Claude Code"'; afplay \"${soundPath}\"`;
+const stopCommand = `osascript -e 'display notification "Task Complete" with title "Claude Code"'; afplay "${soundPath}"`;
+const notificationCommand = `osascript -e 'display notification "Claude Code needs your attention" with title "Claude Code"'; afplay "${soundPath}"`;
+
+function makeHookEntry(command) {
+    return { hooks: [{ type: 'command', command }] };
+}
 
 try {
     console.log('Installing Claude Code sound notification...');
-    // 3. Use the Claude CLI to set the global hook
-    execSync(`claude config set --global hooks.stop "${commandStop}"`, { stdio: 'inherit' });
-    execSync(`claude config set --global hooks.notification "${commandAttention}"`, { stdio: 'inherit' });
+
+    let settings = {};
+    if (fs.existsSync(settingsPath)) {
+        settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+    }
+
+    if (!settings.hooks) settings.hooks = {};
+    settings.hooks.Stop = [makeHookEntry(stopCommand)];
+    settings.hooks.Notification = [makeHookEntry(notificationCommand)];
+
+    fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
     console.log('✅ Success! Restart Claude Code to activate.');
 } catch (error) {
     console.error('Failed to install hook:', error.message);
+    process.exit(1);
 }

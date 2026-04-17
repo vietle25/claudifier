@@ -21,9 +21,7 @@ Never miss a beat! When running long tasks, Claude Code will alert you via the m
 npm install -g claudifier
 ```
 
-That's it. The installer runs automatically and:
-1. Copies the sound file to `~/.claude/sounds/done.mp3`
-2. Configures `Stop` and `Notification` hooks in `~/.claude/settings.json`
+That's it.
 
 Restart Claude Code to activate.
 
@@ -34,4 +32,3 @@ claudifier-uninstall
 npm uninstall -g claudifier
 ```
 
-This removes the hooks from `~/.claude/settings.json` and the sound file from `~/.claude/sounds/`.

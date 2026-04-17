@@ -10,5 +10,19 @@
   "files": [
     "bin",
     "sound"
-  ]
+  ],
+  "keywords": [
+    "claude",
+    "claude-code",
+    "notifications",
+    "macos",
+    "terminal"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vietle25/claudifier.git"
+  },
+  "author": "Viet Le",
+  "homepage": "https://github.com/vietle25/claudifier",
+  "license": "MIT"
 }

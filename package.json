@@ -1,8 +1,11 @@
 {
   "name": "claudifier",
-  "version": "1.0.2",
+  "version": "1.0.3",
+  "scripts": {
+    "postinstall": "node bin/install.js"
+  },
   "bin": {
-    "claudifier": "bin/install.js"
+    "claudifier-uninstall": "bin/uninstall.js"
   },
   "files": [
     "bin",

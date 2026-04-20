@@ -25,6 +25,12 @@ That's it.
 
 Restart Claude Code to activate.
 
+To test the notification immediately:
+
+```bash
+osascript -e 'display notification "Task Complete" with title "Claude Code"' && afplay ~/.claude/sounds/done.mp3
+```
+
 ## Uninstallation
 
 ```bash
